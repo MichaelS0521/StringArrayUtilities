@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -25,6 +27,11 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
+        String num = "";
+        for (int i = 0; i < array.length - 1; i++){
+
+        }
+
         return null;
     }
 
@@ -42,6 +49,12 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
+
+        for (int i = 0; i < array.length; i++){
+            if(array[i] == value) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -75,7 +88,13 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        int numOccurrences = 0;
+        for (String num : array){
+            if (num.contains(value)){
+                numOccurrences++;
+            }
+        }
+        return numOccurrences;
     }
 
     /**
@@ -84,14 +103,29 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        ArrayList<String> returnValues = new ArrayList<>();
+
+        for (String num : array){
+            if (!num.equals(valueToRemove)){
+                returnValues.add(num);
+            }
+        }
+        return returnValues.toArray(new String[returnValues.size()]);
     }
+
 
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
+        ArrayList<String> returnValues = new ArrayList<>();
+
+        for (String num : array){
+
+        }
+
+
         return null;
     }
 
