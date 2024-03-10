@@ -1,6 +1,6 @@
 package com.zipcodewilmington;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by leon on 1/29/18.
@@ -28,11 +28,11 @@ public class StringArrayUtils {
      */ // TODO
     public static String getLastElement(String[] array) {
         String num = "";
-        for (int i = 0; i < array.length - 1; i++){
-
+        for (int i = 0; i < array.length; i++){
+            num = array[i];
         }
 
-        return null;
+        return num;
     }
 
     /**
@@ -40,7 +40,13 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
+        String num = "";
+        for (int i = 0; i < array.length-1; i++){
+            num = array[i];
+        }
+
+        return num;
+
     }
 
     /**
@@ -71,7 +77,13 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        for (int i = 0; i < array.length; i++){
+                if(array[i] != array[array.length-1-i]){
+                    return false;
+                }
+            }
+
+        return true;
     }
 
     /**
@@ -79,7 +91,16 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String combined = String.join("",array).toLowerCase();
+
+        for (char letter : alphabet.toCharArray()) {
+            if(combined.indexOf(letter) == -1){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -134,7 +155,25 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        List<String> result = new ArrayList<>();
+        String currentState = "";
+
+        for (String str : array) {
+            if (result.size() > 0 && str.equals(result.get(result.size() -1))) {
+                currentState += str;
+            } else {
+                if (!currentState.isEmpty()) {
+                    result.add(currentState);
+                    currentState = "";
+                }
+                result.add(str);
+            }
+        }
+        if(!currentState.isEmpty()) {
+            result.add(currentState);
+        }
+        System.out.println(Arrays.toString(result.toArray(new String[0])));
+        return result.toArray(new String[0]);
     }
 
 
