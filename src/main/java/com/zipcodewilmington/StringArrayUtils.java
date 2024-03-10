@@ -69,7 +69,13 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        String[] reversedArray = new String[array.length];      //creates a new array the same size as original array.
+
+        for (int i = 0; i < array.length; i++) {
+            reversedArray[i] = array[array.length -1 -i];   //reads the original array in reverse = new array.
+        }
+
+        return reversedArray;
     }
 
     /**
@@ -140,14 +146,16 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        ArrayList<String> returnValues = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
 
-        for (String num : array){
-
+        for (String str : array){
+            if (result.isEmpty() || !str.equals(result.get(result.size() -1))) {
+                result.add(str);
+            }
         }
 
 
-        return null;
+        return result.toArray(new String[0]);
     }
 
     /**
@@ -155,26 +163,32 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        List<String> result = new ArrayList<>();
-        String currentState = "";
 
-        for (String str : array) {
-            if (result.size() > 0 && str.equals(result.get(result.size() -1))) {
-                currentState += str;
-            } else {
-                if (!currentState.isEmpty()) {
-                    result.add(currentState);
-                    currentState = "";
-                }
-                result.add(str);
+        String[] result = new String[array.length];     // create new string array, with length of original array.
+        int index = 0;
+
+        StringBuilder currentString = new StringBuilder();
+        currentString.append(array[0]);
+
+        for (int i = 1; i < array.length; i++){
+            if (array[i] == array[i - 1]) {
+                currentString.append(array[i]);
+            }else {
+                result[index] = currentString.toString();
+                index++;
+                currentString = new StringBuilder();
+                currentString.append(array[i]);
             }
         }
-        if(!currentState.isEmpty()) {
-            result.add(currentState);
-        }
-        System.out.println(Arrays.toString(result.toArray(new String[0])));
-        return result.toArray(new String[0]);
-    }
 
+        result[index] = currentString.toString();
+
+        String[] finalResult = new String[index + 1];   // new array with the size of the result.
+        System.arraycopy(result, 0, finalResult, 0, index +1);
+
+        System.out.print(Arrays.toString(finalResult));
+
+        return finalResult;
+    }
 
 }
